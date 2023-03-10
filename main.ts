@@ -1,5 +1,8 @@
 let i = 0
 let count = 0
+let acc_x = 0
+let acc_y = 0
+let isEast = false
 function pin_select () {
     while (true) {
         if (input.pinIsPressed(TouchPin.P0)) {
@@ -41,10 +44,47 @@ function graph (btn: string) {
                     led.toggle(count, count)
                     count += 1
                 }
+            } else {
+                if (btn == "A+B") {
+                    basic.showLeds(`
+                        . . . . .
+                        . . . . .
+                        . . # . .
+                        . . . . .
+                        . . . . .
+                        `)
+                    basic.pause(100)
+                    basic.showLeds(`
+                        . . . . .
+                        . . # . .
+                        . # # # .
+                        . . # . .
+                        . . . . .
+                        `)
+                    basic.pause(100)
+                    basic.showLeds(`
+                        . . # . .
+                        . . # . .
+                        # # # # #
+                        . . # . .
+                        . . # . .
+                        `)
+                    basic.pause(100)
+                    basic.clearScreen()
+                    basic.pause(200)
+                }
             }
         }
     }
 }
+input.onButtonPressed(Button.AB, function () {
+    graph("A+B")
+})
 input.onButtonPressed(Button.B, function () {
     graph("B")
+})
+basic.forever(function () {
+    acc_x = input.acceleration(Dimension.X)
+    acc_y = input.acceleration(Dimension.Y)
+    isEast = input.compassHeading() == 0
 })
