@@ -1,8 +1,25 @@
+let i = 0
 let count = 0
+function pin_select () {
+    while (true) {
+        if (input.pinIsPressed(TouchPin.P0)) {
+            return 1
+        } else {
+            if (input.pinIsPressed(TouchPin.P1)) {
+                return 2
+            } else {
+                if (input.pinIsPressed(TouchPin.P2)) {
+                    return 3
+                }
+            }
+        }
+    }
+}
 input.onButtonPressed(Button.A, function () {
-    graph("a", 3)
+    graph("a")
 })
-function graph (btn: string, i: number) {
+function graph (btn: string) {
+    i = pin_select()
     for (let index = 0; index < i; index++) {
         count = 0
         if (btn == "a") {
@@ -25,5 +42,5 @@ function graph (btn: string, i: number) {
     }
 }
 input.onButtonPressed(Button.B, function () {
-    graph("b", 4)
+    graph("b")
 })
