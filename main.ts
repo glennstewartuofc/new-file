@@ -16,13 +16,17 @@ function pin_select () {
     }
 }
 input.onButtonPressed(Button.A, function () {
-    graph("a")
+    graph("A")
 })
 function graph (btn: string) {
     i = pin_select()
+    basic.showString(btn)
+    basic.clearScreen()
+    basic.showString("" + (i))
+    basic.clearScreen()
     for (let index = 0; index < i; index++) {
         count = 0
-        if (btn == "a") {
+        if (btn == "A") {
             for (let index = 0; index < 5; index++) {
                 led.toggle(count, 4 - count)
                 basic.pause(100)
@@ -30,7 +34,7 @@ function graph (btn: string) {
                 count += 1
             }
         } else {
-            if (btn == "b") {
+            if (btn == "B") {
                 for (let index = 0; index < 5; index++) {
                     led.toggle(count, count)
                     basic.pause(100)
@@ -42,5 +46,5 @@ function graph (btn: string) {
     }
 }
 input.onButtonPressed(Button.B, function () {
-    graph("b")
+    graph("B")
 })
